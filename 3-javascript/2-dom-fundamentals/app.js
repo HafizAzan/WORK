@@ -74,7 +74,7 @@ console.log(CardTitle,"CardTitle")
 // allLiElement = (document.querySelector(
 // "ul li:nth-child(2)").innerHTML = `<li class="collection-item">
 //       List Item
-//       <a href="#" class="delete-item secondary-content">
+//       <a href="#" class="fordelete-item secondary-content">
 //       <i class="fa fa-remove"></i>    
 //       </a>
 //       </li>`
