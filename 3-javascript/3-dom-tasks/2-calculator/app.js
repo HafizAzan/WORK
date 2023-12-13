@@ -31,6 +31,18 @@ ClearEqual.addEventListener('click',function(e){
     console.log(ClearEqual,"ClearEqual");
 });
 
+function regexWork (string = ""){
+    return /[a-zA-Z]+$/.test(string)
+};
+
+selectScreen.addEventListener("input",function (e){
+    e.preventDefault();
+    const screenInput = e.target;
+    if(regexWork(selectScreen.value)){
+        selectScreen.value = "";
+    }
+});
+
 
 ClearE.addEventListener('click',function(e){
     e.preventDefault();
