@@ -37,16 +37,40 @@ AllShopCustom.addEventListener('click', function(event){
 
   cartItems.append(DivWorkCreate);
     console.log(DivWorkCreate,"DivWorkCreate");
+    updateCartTotal();
  }
 });
 
-const btnRemove = document.querySelectorAll(".btn-remove");
-btnRemove.forEach(function (single){
-    single.addEventListener('click' , function(event){
-        const targetKill = event.target;
-        if(confirm("sach mai aap delete krna chatay hain ?")){
-            targetKill.parentElement.parentElement.parentElement.parentElement.remove();
-        console.log("deleted!")  
-        }
-    });
-});
+function updateCartTotal() {
+  const selectAllCartRows = document.querySelectorAll(".cart-items .cart-row");
+  // console.log(selectAllCartRows, "selectAllCartRows");
+ if (selectAllCartRows?.length > 0) {
+//     // agar cart row ki length 0 se zayada hai tu true
+    let total = 0;
+     selectAllCartRows.forEach(function (singleCartRow) {
+      console.log(singleCartRow, "singleCartRow");
+      const cartPrice = singleCartRow.querySelector(
+        ".cart-price-item-item"
+      )?.innerText;
+      const cartQuantity = singleCartRow.querySelector(".cart-quantity-input");
+
+      total += cartPrice * cartQuantity?.value;
+
+      //bind change event listener in cart quantity input field
+
+      cartQuantity.addEventListener("change", function (e) {
+        const currentElement = e.target;
+        if (currentElement.value <= 0) {
+          currentElement.value = 1;
+  }
+        updateCartTotal();
+      });
+ });
+
+    const cartTotalPriceElement = document.querySelector(".cart-total-price");
+
+    cartTotalPriceElement.innerText = `$ ${total.toFixed(2)}`;
+
+    // console.log(total, "total");
+ }
+};
