@@ -12,7 +12,28 @@ AllShopCustom.addEventListener('click', function(event){
     const ShopItemImg = ShopItemsGoods.querySelector(".shop-item-image");
     const ShopItemsRs = ShopItemsGoods.querySelector(".shop-item-price");
     
-    console.log({currentEl,ShopItemsGoods,ShopItemName,ShopItemImg,ShopItemsRs});
+   // console.log({currentEl,ShopItemsGoods,ShopItemName,ShopItemImg,ShopItemsRs});
+
+    // aaj ka kaam
+
+  const CartItmRow = document.querySelectorAll(".cart-items .cart-row");
+   
+  let alreadyexist = false ;
+
+  if(CartItmRow?.length > 0){
+    CartItmRow?.forEach(function (singleCartRow){
+    const cartAlready = singleCartRow.querySelector(".cart-item-title");
+    if(ShopItemName?.innerText == cartAlready?.innerText ){
+      alreadyexist = true ;
+    }
+    });
+    if(alreadyexist){
+      alert("This Is already exist in our cart.")
+      return ; 
+    }
+  }
+
+  // bss yahan tak
 
     const DivWorkCreate = document.createElement("div");
     DivWorkCreate.className = "cart-row";
@@ -43,6 +64,8 @@ AllShopCustom.addEventListener('click', function(event){
 
 function  updateCartTotal(){
   const AllVariableDiv = document.querySelectorAll(".cart-items .cart-row");
+  const TotalPriceCart = document.querySelector(".cart-total-price");
+
   console.log(AllVariableDiv,"AllVariableDiv"); 
   let total = 0;
   if(AllVariableDiv?.length > 0){
@@ -69,26 +92,51 @@ function  updateCartTotal(){
   });
   });
 
-  const TotalPriceCart = document.querySelector(".cart-total-price");
   TotalPriceCart.innerText = `$ ${total.toFixed(2)}`
-  console.log(total,"total")
+  }else{
+  TotalPriceCart.innerText = `$ 00`
   }
-
-cartItems.addEventListener('click', function(Event){
-Event.preventDefault();
-const targetKiller = Event.target;
-if(targetKiller.classList.contains("btn-remove")){
-  const closeBtn = targetKiller.closest(".cart-row");
-  const imgka = closeBtn.querySelector(".cart-item-image");
-  const titleka = closeBtn.querySelector(".cart-item-title");
-  const Quantityka = closeBtn.querySelector(".cart-quantity-input");
-  // const totalka = closeBtn.querySelector(".cart-total-price");
-
-  cartItems.removeChild(closeBtn);
-
-
-
-}
-console.log(targetKiller,"targetKiller");
-});
 };
+
+  cartItems.addEventListener("click", function (event) {
+    event.preventDefault();
+    const currentElement = event.target;
+  
+    if (
+      currentElement?.classList?.contains("btn-remove") &&
+      confirm("Are you sure ?")
+    ) {
+      currentElement.parentElement.parentElement.remove();
+      updateCartTotal();
+    }
+  });
+
+  const SelectPurchase = document.querySelector(".btn-purchase");
+  SelectPurchase.addEventListener('click',function(event){
+    event.preventDefault();
+  const targeter = event.target;
+  cartItems.remove(targeter)
+  updateCartTotal();
+    console.log(targeter,"targeter");
+
+  });
+
+
+// ye mera tariqa
+
+// cartItems.addEventListener('click', function(Event){
+// Event.preventDefault();
+// const targetKiller = Event.target;
+// if(targetKiller.classList.contains("btn-remove")){
+//   const closeBtn = targetKiller.closest(".cart-row");
+//   const imgka = closeBtn.querySelector(".cart-item-image");
+//   const titleka = closeBtn.querySelector(".cart-item-title");
+//   const Quantityka = closeBtn.querySelector(".cart-quantity-input");
+
+//   cartItems.removeChild(closeBtn);
+
+//   updateCartTotal();
+
+// }
+// console.log(targetKiller,"targetKiller");
+// });
