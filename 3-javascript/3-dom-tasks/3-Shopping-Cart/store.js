@@ -114,15 +114,29 @@ function  updateCartTotal(){
   const SelectPurchase = document.querySelector(".btn-purchase");
   SelectPurchase.addEventListener('click',function(event){
     event.preventDefault();
-  const targeter = event.target;
-  cartItems.remove(targeter)
+ if(confirm("Are U Sure?")){
+  cartItems.innerHTML="";  
+  console.log(SelectPurchase,"SelectPurchase");
+ }
   updateCartTotal();
-    console.log(targeter,"targeter");
-
+   
   });
 
 
 // ye mera tariqa
+
+// const SelectPurchase = document.querySelector(".btn-purchase");
+// SelectPurchase.addEventListener('click',function(event){
+//   event.preventDefault();
+// const targeter = event.target;
+// if( confirm("Are U Sure?")){
+//   cartItems.remove(targeter)  
+//   console.log(targeter,"targeter");
+  
+// }
+
+// });
+// updateCartTotal();
 
 // cartItems.addEventListener('click', function(Event){
 // Event.preventDefault();
