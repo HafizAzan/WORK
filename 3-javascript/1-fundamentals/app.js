@@ -138,7 +138,7 @@ const HtmlCssJavascript = "course";
 // console.log(HtmlCssJavascript, "HtmlCssJavascript");
 // console.log(typeof HtmlCssJavascript, "HtmlCssJavascript");
 
-// parseInt : ye convert karta hainumber ko string mai
+// parseInt : ye convert karta hai String ko number mai
 
 const mouseprice = "500";
 console.log(mouseprice, "mouseprice");
