@@ -1,121 +1,70 @@
-// let budgetInput = parseInt(document.querySelector('#budget-input').value);
-// const Btn1 = document.querySelector("#budget-submit");
-// let ExpenceWrite = document.querySelector('#expense-input');
-// let AmountInput = document.querySelector('#amount-input');
-// const Btn = document.querySelector("#expense-submit");
+const Budgetforms = document.querySelector('.budget-form'); 
+const budgetInput = document.querySelector("#budget-input");
+const budgetPrice = document.querySelector("#budget-amount");
+const balancePrice = document.querySelector('#balance-amount')
+const ExpencePrice = document.querySelector('#expense-amount')
+const Expenseforms = document.querySelector('.expense-form'); 
+const ExpenseInput = document.querySelector("#expense-input");
+const ExpenceWritePrice = document.querySelector("#amount-input")
+const expenseList = document.getElementById('expense-list');
+const justExpence = document.querySelector('.expense');
+// Budget Form & addition in budgetPrice &balancePrice //
+ 
+Budgetforms.addEventListener("submit",function(event){
+  event.preventDefault();
+  const value1 = budgetInput?.value;
+  if(!value1){
+    alert("Please Fill This form ?")
+    return alert;
+  }
+  budgetPrice.innerHTML = + budgetInput.value;
+  balancePrice.innerHTML = + budgetInput.value;
+  budgetInput.value = "";
 
-// let Expence = document.querySelector("#expense-amount");
-// let Balance = parseInt(document.querySelector("#balance-amount").innerText);
-// const List = document.querySelector('#expense-list');
-// const SelectIputField = document.querySelector('.form-control');
-// console.log({budgetInput,Btn1,ExpenceWrite,AmountInput,Btn,Amount,Expence,Balance,List});
+});
 
-// // let kaam = {
-// //     1Value =  
-// // }
-// let TotalAmount = 0;
+// expense create & addition in Expense & subtraction in balance
 
-// const InputBox = document.querySelector(".budget-form");
-// InputBox.addEventListener('submit', function(event){
-//     event.preventDefault();
-//     var budget = parseInt(budgetInput);
-//     var expense = parseInt(budgetInput);
-    
-// console.log(InputBox,"SUBMITED!");
+Expenseforms.addEventListener('submit',function(event){
+event.preventDefault();
+let ExpenceTitle = ExpenseInput.value;
+let ExpenceAmount = ExpenceWritePrice.value;
 
-// const Selectbudget = document.querySelector('#budget-amount');
+const ExpenseCreate = document.createElement('div');
+ExpenseCreate.className = "expense";
+ExpenseCreate.innerHTML = `<div class="expense-item d-flex justify-content-between align-items-baseline">
+<h6 class="expense-title mb-0 text-uppercase list-item">- ${ExpenceTitle}</h6>
+<h5 class="expense-amount mb-0 list-item">- ${ExpenceAmount}</h5>
+<div class="expense-icons list-item">
+ <a href="#" class="delete-icon"  >
+  <i class="fas fa-trash"></i>
+ </a>
+</div>
+</div>`;
 
-// console.log(SelectIputField,"SelectIputField")
+expenseList.append(ExpenseCreate);
 
-// const FieldValue = SelectIputField?.value; 
-// console.log(FieldValue,"SelectIputFieldValue");
-// if(!FieldValue){
-//     alert("Fill your budget")
-//     return;
-// }
+const NewBlance = balancePrice.innerHTML - ExpenceAmount;
+balancePrice.innerHTML = + NewBlance;
+ExpencePrice.innerHTML = + (parseInt(ExpencePrice.innerHTML)  +  parseInt(ExpenceAmount));
 
-// const SelectRow = document.querySelector(".budget");
-// console.log(SelectRow,"SelectRow");
-// const CreateKrna = document.createElement("span");
-// CreateKrna.id ="budget-amount";
-// CreateKrna.innerHTML = `${FieldValue}`
-// SelectRow.append(CreateKrna);
-// // /================================ //
-// const SelectBalance = document.querySelector(".balance");
-// console.log(SelectBalance,"SelectBalance");
-// const CreateKrnaa = document.createElement("span");
-// CreateKrnaa.id ="balance-amount";
-// CreateKrnaa.innerHTML = `${FieldValue}`
-// SelectBalance.append(CreateKrnaa);
-// SelectIputField.value = "";
-// update()
-// });
+let value2 = ExpenseInput?.value;
 
+if(value2,ExpenceAmount == 0 || value2,ExpenceAmount == "" ){
+  alert("Please Fill This form ?")
+  return alert;
+}
+ExpenseInput.value =  "";
+ExpenceWritePrice.value = "" ;
+});
 
-document.addEventListener('DOMContentLoaded', function() {
-    const budgetForm = document.querySelector('.budget-form');
-    const budgetInput = document.getElementById('budget-input');
-    const budgetAmount = document.getElementById('budget-amount');
-    const expenseAmount = document.getElementById('expense-amount');
-    const balanceAmount = document.getElementById('balance-amount');
-    const expenseForm = document.querySelector('.expense-form');
-    const expenseInput = document.getElementById('expense-input');
-    const amountInput = document.getElementById('amount-input');
-    const expenseList = document.getElementById('expense-list');
-  
-    budgetForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      budgetAmount.textContent =  + budgetInput.value;
-      balanceAmount.textContent =  + budgetInput.value;
-      budgetInput.value = '';
-    });
-  
-    expenseForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      const expenseTitle = expenseInput.value;
-      const expenseValue = amountInput.value;
-  
-      const expense = document.createElement('div');
-      expense.classList.add('expense');
-      expense.innerHTML = `
-        <div class="expense-item d-flex justify-content-between align-items-baseline">
-          <h6 class="expense-title mb-0 text-uppercase list-item">- ${expenseTitle}</h6>
-          <h5 class="expense-amount mb-0 list-item">${expenseValue}</h5>
-          <div class="expense-icons list-item">
-            <a href="#" class="delete-icon">
-              <i class="fas fa-trash"></i>
-            </a>
-          </div>
-        </div>
-      `;
-      expenseList.appendChild(expense);
-  
-      const newBalance = balanceAmount.textContent - expenseValue;
-      balanceAmount.textContent =  + newBalance;
-      expenseAmount.textContent =  + (parseInt(expenseAmount.textContent) + parseInt(expenseValue));
-      
-      expenseInput.value = '';
-      amountInput.value = '';
-    });
-  
     expenseList.addEventListener('click', function(event) {
         event.preventDefault();
          if(event.target.className == "fas fa-trash"){
             console.warn("btn is working");
             if(confirm("seriously ?")){
-              event.target.parentElement.parentElement.remove();
+              event.target.parentElement.parentElement.parentElement.remove();
               console.log("all working");
-              }
-         }
-        })
-        // if (targeter.classList.contains('delete-icon')) {
-        //   const parent = targeter.closest('.expense');
-        //   const amount = parent.querySelector('.expense-amount').textContent;
-        //   const newBalance = balanceAmount.textContent - amount;
-        //   balanceAmount.textContent = '$' + newBalance;
-        //   expenseAmount.textContent = '$' + (parseInt(expenseAmount.textContent) - parseInt(amount));
-        //   parent.remove();
-        // }
-    // });
-  });
-  
+           }
+          }
+});
