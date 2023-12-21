@@ -33,7 +33,7 @@ let ExpenceAmount = ExpenceWritePrice.value;
 const ExpenseCreate = document.createElement('div');
 ExpenseCreate.className = "expense";
 ExpenseCreate.innerHTML = `<div class="expense-item d-flex justify-content-between align-items-baseline">
-<h6 class="expense-title mb-0 text-uppercase list-item">- ${ExpenceTitle}</h6>
+<h6 class="expense-title mb-0 text-uppercase list-item">-${ExpenceTitle}</h6>
 <h5 class="expense-amount mb-0 list-item">- ${ExpenceAmount}</h5>
 <div class="expense-icons list-item">
  <a href="#" class="delete-icon"  >
