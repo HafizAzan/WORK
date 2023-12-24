@@ -37,6 +37,7 @@ AllShopCustom.addEventListener('click', function(event){
 
     const DivWorkCreate = document.createElement("div");
     DivWorkCreate.className = "cart-row";
+    DivWorkCreate.style.transition_duration = "3s";
     DivWorkCreate.innerHTML =  `<div class="cart-item cart-column">
     <img
       class="cart-item-image"
@@ -61,6 +62,8 @@ AllShopCustom.addEventListener('click', function(event){
     updateCartTotal();
  }
 });
+
+var id = setTimeout(updateCartTotal,3000)
 
 function  updateCartTotal(){
   const AllVariableDiv = document.querySelectorAll(".cart-items .cart-row");
@@ -96,7 +99,7 @@ function  updateCartTotal(){
   }else{
   TotalPriceCart.innerText = `$ 00`
   }
-};
+}
 
   cartItems.addEventListener("click", function (event) {
     event.preventDefault();
