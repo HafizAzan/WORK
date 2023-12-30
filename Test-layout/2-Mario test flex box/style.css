@@ -44,6 +44,7 @@ header{
 section{
     background-image: url("img/banner.png");
     background-size: cover;
+    overflow: hidden;
     background-repeat: no-repeat;
     background-position:right;
     height: 500px;

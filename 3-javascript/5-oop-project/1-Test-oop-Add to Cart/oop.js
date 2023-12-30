@@ -54,7 +54,7 @@ console.log(ClearTask)
 ClearTask.addEventListener("click" , function (e){
 e.preventDefault();
 if(confirm("Are you Sure ?")){
-    collection.remove(ClearTask)
+    collection.innerHTML = ""
 }
 });
 
