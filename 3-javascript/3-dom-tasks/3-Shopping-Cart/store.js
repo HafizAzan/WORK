@@ -63,7 +63,7 @@ AllShopCustom.addEventListener('click', function(event){
  }
 });
 
-var id = setTimeout(updateCartTotal,3000)
+setTimeout(updateCartTotal,3000)
 
 function  updateCartTotal(){
   const AllVariableDiv = document.querySelectorAll(".cart-items .cart-row");
@@ -83,7 +83,7 @@ function  updateCartTotal(){
   console.log(VariableQuantity,"VariableQuantity");
  
   total += VariablePrice * VariableQuantity?.value;
-  
+  console.log(total)
   VariableQuantity.addEventListener('change' , function(e){
     const currentE = e.target;
     if(currentE.value <= 0){
