@@ -258,3 +258,15 @@ new Promise((reject,resolve)=>setTimeout(()=>resolve(5),8000)),
 // Superaragent
 // JQuery
 // Node Http
+
+
+/* 
+Request Method
+
+* GET : get data
+* POST : store data
+* PUT : update data
+* PATCH : update data partically
+* DELETE : data delete
+
+*/
