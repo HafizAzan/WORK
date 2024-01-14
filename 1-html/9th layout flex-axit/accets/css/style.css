@@ -46,6 +46,11 @@ header{
     animation-name: moveInRight;
     animation-duration: 4s;
 }
+#navigation ul li:hover{
+    cursor: pointer;
+    color: skyblue;
+}
+
 #navigation ul li{
     list-style-type: none;
     margin-right: 8%;

@@ -227,9 +227,9 @@ TESTINGVARIABLE = {
 
 // math objects
 
-// let testing_variable = Math.PI;
-// testing_variable = Math.E;
-// testing_variable = Math.round(99.30);
+// let testing_variable = Math.PI;  (3.14159)
+// testing_variable = Math.E; (2.71828)
+// testing_variable = Math.round (99.30); 
 
 // console.table(testing_variable);
 // console.table(typeof testing_variable);
@@ -302,7 +302,7 @@ testing_Variable =
 and my age is" 16 years old `;
 console.log(testing_Variable);
 
-testing_Variable =testing_Variable.concat(
+testing_Variable = testing_Variable.concat(
     " new things",
     " new things 1",
     " new things 2",
@@ -425,7 +425,7 @@ else {
 // LOGICAL OPERATORS
 
 //&& AND = both condition should be true
-//|| AND = one condition should be true
+//|| OR = one condition should be true
 
 
 //dono condition true honi chahiye
@@ -558,8 +558,8 @@ today. setHours(1);
 today. setMinutes(10);
 today. setSeconds(30);
 
-console.log(
-    `${today.getDate()} - ${today.getMonth()+1} - ${today.getFullYear()}` 
+console.log( 
+    `${today.getDate()} - ${today.getMonth()+1} - ${today.getFullYear()} ` 
 );
 let day;
 
