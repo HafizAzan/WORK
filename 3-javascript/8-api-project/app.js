@@ -3,12 +3,18 @@ const tbody = document.querySelector("#todos-listing")
 const CreatePostPopup = document.querySelector("#create-post-form")
 const TitleInput = document.querySelector("#post_title");
 const BodyInput = document.querySelector("#post_body");
+const editPostPopup = document.querySelector("#edit-post-form");
+const edit_Post_Title = document.querySelector("#edit_post_title");
+const edit_Post_Body = document.querySelector("#edit_post_body");
+const EditId = document.querySelector("#edit_post_id");
+const Loader = document.querySelector(".loader-container");
 
 CreatePostPopup.addEventListener("submit",(event) => {
   event.preventDefault();
   const titleValue = TitleInput?.value;
   const bodyValue = BodyInput?.value;
   const btnSubmit = document.querySelector("#create-post-form button");
+
 
   if( TitleInput?.value == ""|| BodyInput?.value =="" ){
     alert("OOPSY!")
@@ -23,6 +29,7 @@ CreatePostPopup.addEventListener("submit",(event) => {
   }
 
   btnSubmit.setAttribute("disabled","disabled");
+  Loader.style.display = "flex";
 
   fetch(BaseUrlApi,{
     method : "POST",
@@ -32,32 +39,66 @@ CreatePostPopup.addEventListener("submit",(event) => {
     body : JSON.stringify(body),
   }).then(async (reponse) => {
     const jsonData = await reponse.json();
-    console.log(jsonData,"jsonData");
     TitleInput.value = "";
     BodyInput.value = "" ;
     $("#create-post").modal("hide");
     btnSubmit.removeAttribute("disabled");
+    await getPost();
+    Loader.style.display = "none";
   }).catch((error) =>{
     alert(" something went wrong.")
     btnSubmit.removeAttribute("disabled");
+    Loader.style.display = "none";
     console.error(error,"error")
   });
+});
+
+editPostPopup.addEventListener("submit",(e)=>{
+  e.preventDefault();
+  const editTitleValue = edit_Post_Title?.value;
+  const editBodyValue = edit_Post_Body?.value;
+  const EditPostId = EditId?.value;
+  if(!editTitleValue || !EditPostId ||!editBodyValue){
+    alert("Plzz Fill This Edit Form.")
+    return;
+  }
+
+  const body = {
+    title : editTitleValue,
+    body : editBodyValue,
+    id : EditPostId,
+  }
+  Loader.style.display = "flex";
+
+  fetch(`${BaseUrlApi}/${EditPostId}`,{
+    method: "PUT",
+    headers:{
+      "content-type":"application/json"
+    },
+    body: JSON.stringify(body)
+  }).then(async (data) => {
+    // const JsonData = await data.json();
+    
+    await getPost();
+    $("#edit-post").modal("hide")
+    Loader.style.display = "none";
+  })
+
 });
 
 const EditWork = (postId) => {
   return fetch(`${BaseUrlApi}/${postId}`)
   .then((data)=> data.json())
   .then((data) =>{
-    console.log(data,"data")
     return data;
   })
   .catch((error)=>console.error)
 }
 
 const getPost = () => {
+  Loader.style.display = "flex";
   return(fetch(BaseUrlApi)
 .then((Response) => Response.json()).then((data) =>{
-    console.log(data,"data");
     let output = ""
     data?.forEach((singleRow) => {
         output += `<tr>
@@ -68,33 +109,41 @@ const getPost = () => {
         <td><a href="#" class="btn btn-danger delete-btn" data-post-id="${singleRow.id}">Delete</a></td>
       </tr>`;
       tbody.innerHTML = output;
+      Loader.style.display = "none";
     });
 })
-.catch((error) => console.error));
-}
+.catch((error) => {
+  console.error(error);
+  Loader.style.display = "none";
+}))};
 getPost();
 
 tbody.addEventListener("click", async (event) =>{
   event.preventDefault();
-  const CurrentElement = event.target;
-  console.log(CurrentElement,"CurrentElement")
+  const CurrentElement = event.target
   if(CurrentElement.classList.contains("delete-btn") && confirm("Are You Syre")){
     const SelectDeleteAtt = CurrentElement.getAttribute("data-post-id");
     console.warn("deleted!")
+    Loader.style.display = "flex";
     fetch(`${BaseUrlApi}/${SelectDeleteAtt}`,{
       method : "DELETE",
     }).then( async(data) =>{
       const DataJson = await data.json();
-      console.log(DataJson,"DataJson");
+      Loader.style.display = "none";
       getPost()
     }).catch((error) => console.error(alert("oopsy")))
   }
 
   if(CurrentElement.classList.contains("edit-btn")){
     const postId = CurrentElement.getAttribute("data-post-id");
+    Loader.style.display = "flex";
     const singleWork = await EditWork(postId);
     $("#edit-post").modal("show")
-    console.log(singleWork,"singleWork")
+    Loader.style.display = "none";
+
+    edit_Post_Title.value = singleWork.title;
+    edit_Post_Body.value = singleWork.body;
+    EditId.value = singleWork.id;
   }
 });
 
