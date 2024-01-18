@@ -17,7 +17,7 @@ CreatePostPopup.addEventListener("submit",(event) => {
 
 
   if( TitleInput?.value == ""|| BodyInput?.value =="" ){
-    alert("OOPSY!")
+    alert("OOPSY! plz Fill this & without fill not submit.")
     TitleInput.value = "";
     BodyInput.value = "" ;
     return;
@@ -41,8 +41,8 @@ CreatePostPopup.addEventListener("submit",(event) => {
     const jsonData = await reponse.json();
     TitleInput.value = "";
     BodyInput.value = "" ;
-    $("#create-post").modal("hide");
     btnSubmit.removeAttribute("disabled");
+    $("#create-post").modal("hide");
     await getPost();
     Loader.style.display = "none";
   }).catch((error) =>{
@@ -130,7 +130,7 @@ tbody.addEventListener("click", async (event) =>{
     }).then( async(data) =>{
       const DataJson = await data.json();
       Loader.style.display = "none";
-      getPost()
+      await getPost()
     }).catch((error) => console.error(alert("oopsy")))
   }
 
