@@ -57,6 +57,7 @@ console.log(fname,lname)
 
 const fuName = fname + " "+ lname;
 console.log(fuName,"fuName ye esay hee pass wala hai")
+
 const fullName = `${fname} ${lname}`
 console.log(fullName,"fullNameYeTemplate literal wala hai")
 
@@ -101,6 +102,7 @@ push
 pop
 unshift
 slice
+splice
 shift
 */
 
@@ -163,7 +165,7 @@ console.log(four,"every wala")
 // aur (some) mai kisi 1 ki condition true hain tw tw tru warna false dega
 
 let five;
-five =products.some((singleSome) => singleSome.price > 200)
+five = products.some((singleSome) => singleSome.price > 0)
 console.log(five,"some wala")
 
 //reduce
@@ -258,3 +260,68 @@ console.log(UpdateObject10,"UpdateObject10 hai ye")
 
 const combineObject = {...Object10,...UpdateObject10}
 console.log(combineObject,"combineObject")
+
+//Optional chaining '?.'
+
+let variable = {}
+// console.log(variable.price.value) // ERROR 
+console.log(variable?.price?.value) // Undefined
+
+//Nullish coalescing operator '??'
+
+let a;
+console.log(a ?? "anoymouse")
+// console.log(a !== null && a !== undefined ? "anoymouse" : "");
+
+//Comparison with || 
+
+let nameOne = null;
+let nameTwo = null;
+let nameThree = "working"
+
+// show the first truthy value;
+console.log(nameOne || nameTwo || nameThree || "hello")
+
+// logical OR vs nullish ??
+
+// yahan nichay tw defined hai tw ku nhi ara 
+// waja =  logical OR  = ko jab ham camparison mai laaatay hain
+// jab ham defined krtay hain 0 ko tw ye hamai ye agla argument pass kara deta hai
+// q ke ye confused hojata hai ke ye 0 = false is waja se || in pipe line ke baad 
+// wali value lai aata hai 
+
+let height = 0;
+// console.log(height || 100); // 0 ana chahiye lkn nhi ara
+console.log(height ?? 100);
+
+// aur nullish ?? mai hamay ye esa hee dega jesa defined kia hoga warna || iske baad wala dega
+/*
+
+==== logical OR ====
+
+alert(true || true) // true
+alert(true || false) // true
+alert(false || true)  // true
+alert(false || false) // false  
+
+koi 1 condition true hogui tw wo true dega
+
+=== logical And && ===
+
+alert(true && true) // true
+alert(true && false) // false
+alert(false && true)  // false
+alert(false && false) // false  
+
+dono condition true hongi tw true return krega 
+
+*/
+/*
+Rest opretor
+ye function ke parameter mai hota hai
+*/
+
+function check(fparam, ...lparam){
+  console.log(fparam,lparam)
+}
+check(1,2,3,4,5,6,7,8,9)
