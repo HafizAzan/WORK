@@ -55,10 +55,10 @@ const fname = "hafiz";
 const lname = "Azan";
 console.log(fname,lname)
 
-const fuName = fname + " "+ lname;
+let fuName = "my name is "+ fname + " " + lname;
 console.log(fuName,"fuName ye esay hee pass wala hai")
 
-const fullName = `${fname} ${lname}`
+const fullName = `my name is${fname} ${lname}`
 console.log(fullName,"fullNameYeTemplate literal wala hai")
 
 //Array Methods
@@ -133,6 +133,7 @@ console.log(ProductNewArray,"ProductNewArray")
 
 // filter 
 //wo product filter kar ke lao jis ki id brabar ho kisi specific ke
+// ismia kisi specific ke zareeai single objct le skta hun agar object ho tw
 let onceArray;
 onceArray = products.filter((singleThing )=> singleThing.id === 1)
 // onceArray = products.filter((singleThing )=> singleThing.name === "Product Three" )
@@ -291,7 +292,7 @@ console.log(nameOne || nameTwo || nameThree || "hello")
 // wali value lai aata hai 
 
 let height = 0;
-// console.log(height || 100); // 0 ana chahiye lkn nhi ara
+console.log(height || 100); // 0 ana chahiye lkn nhi ara
 console.log(height ?? 100);
 
 // aur nullish ?? mai hamay ye esa hee dega jesa defined kia hoga warna || iske baad wala dega

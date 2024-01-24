@@ -2,13 +2,13 @@
 // ye html ke documentent ko object ki surat mai lai aata hai  like is tarah ===Example==
 
 console.log(document)
-// console.log(document); // basurate {;} array
+// console.log(document); // basurate {}; object
 
 let selectTaskBtn = document.querySelector("#task-button");
 console.log(selectTaskBtn,"selectTaskBtn");
 
 selectTaskBtn.addEventListener("click", function (event) {
-    event.preventDefault();
+    event.preventDefault(); // default functionality ruk jaaye gi
     console.log("clicked!");
     // return;
 

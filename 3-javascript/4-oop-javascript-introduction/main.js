@@ -18,7 +18,6 @@ const Person = new PersonOne();
 console.log(Person)
 //constructor functions
 
-
 function PersonTwo(name,age,birthday) {
     this.name = name,
     this.age = age,
@@ -85,10 +84,12 @@ motherLanguage(){
   return "Urdu"
 }
 }
+// const parentInitialize = new Parent();
+// console.log(parentInitialize.motherLanguage(),"language")
 
-class children extends Parent {};
-const children1 = new children();
-console.log(children1.motherLanguage());
+// class children extends Parent {};
+// const children1 = new children();
+// console.log(children1.motherLanguage());
 
 const ExampleARR = []
 console.log(ExampleARR.__proto__)
@@ -106,16 +107,16 @@ function people(fname,lname,dob){
   // }
 };
 
-// people.prototype.calculateAge =  function(){
-//   const Dateabhi = Date.now() - this.birthday.getTime();
-//   const NaiDate = new Date(Dateabhi);
-//   return Math.abs(NaiDate.getUTCFullYear()- 2007)
-//};
+people.prototype.calculateAge =  function(){
+  const Dateabhi = Date.now() - this.birthday;
+  const NaiDate = new Date(Dateabhi);
+  return Math.abs(NaiDate.getUTCFullYear()- 2007)
+};
 
-const PersonPhoto = new people("Hafiz","Azan","2007-01-26")
+const PersonPhoto = new people("Hafiz","Azan",0-26-2007)
 console.log(PersonPhoto)
-// console.log(PersonPhoto.__proto__.calculateAge(),"check")
-// PersonPhoto.calculateAge();
+console.log(PersonPhoto.__proto__.calculateAge(),"check")
+PersonPhoto.calculateAge();
 
 
 function people1(fname, lname){
@@ -134,12 +135,13 @@ function customer(fname,lname,phone,membership){
   people1.call(this,fname,lname)
   this.phone = phone;
   this.membership = membership;
+  return
 }
 customer.prototype = Object.create(people1.prototype)
 
 const customer1 = new customer("Tom","Holland", "555 5555 555","Standard");
 console.log(customer1)
-
+console.log(customer1.greeting())
 
 // polimorphism
 class animal{

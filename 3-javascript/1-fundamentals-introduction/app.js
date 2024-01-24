@@ -134,18 +134,21 @@ const htmlCssJavascript = "course";
 // 4
 const HtmlCssJavascript = "course";
 
-// // type conversion
 // console.log(HtmlCssJavascript, "HtmlCssJavascript");
 // console.log(typeof HtmlCssJavascript, "HtmlCssJavascript");
 
-// parseInt : ye convert karta hai String ko number mai
-
+// // type conversion
+// parseInt / new Number  : ye convert karta hai String ko number mai
+// new Number() , parseInt()
 const mouseprice = "500";
 console.log(mouseprice, "mouseprice");
 console.log(typeof mouseprice, "mouseprice");
 
 console.log(parseInt(mouseprice, "mouseprice"));
 console.log(typeof parseInt(mouseprice, "mouseprice"));
+
+// const mouseNumebr = (parseInt(mouseprice))
+// console.log(mouseNumebr, "mouseNumber");
 
 // new number: ye convert karta hai number ko string mai
 
@@ -227,12 +230,12 @@ TESTINGVARIABLE = {
 
 // math objects
 
-// let testing_variable = Math.PI;  (3.14159)
+// let testing_variable = Math.PI;  // (3.14159)
 // testing_variable = Math.E; (2.71828)
-// testing_variable = Math.round (99.30); 
-
-// console.table(testing_variable);
-// console.table(typeof testing_variable);
+// let roundVaribale = Math.round(99.49); 
+// roundVaribale = Math.round(99.50)
+// console.table(roundVaribale);
+// console.table(typeof roundVaribale);
 
 // The Math.floor() function returns the largest number less than or equal to a given number.
 
@@ -261,7 +264,7 @@ console.info(typeof val);
 
 /*=====  End of math floor  ======*/
 
-// let testing_variable = Math.pow(5,4);
+// let testing_variable = Math.pow(5,4); // 5 * 5 * 5 * 5 = 625
 // testing_variable = Math.min(1,2,3,4,5,6,7,8,9,);
 // testing_variable = Math.max(1,2,3,4,5,6,7,8,9,50);
 // testing_variable = Math.random();
@@ -409,10 +412,10 @@ if(mobile2 !== "1"){
 let id = 100;
 
 if(id < 40){
-    console.log("correct")
+    console.log("incorrect")
 }
 else {
-    console.log("incorrect")
+    console.log("correct")
 }
 
 if(id > 40){
@@ -466,6 +469,11 @@ else{
 const condition = 
 id === 100 ? console.log("id is hundred") : console.log("id is not hundred")
 
+let idNAme = 250;
+
+const condition2 =
+idNAme === 250 ? console.log("idName is 250") : console.log("idName is not 250")
+
 //multiple if else conditions
 
 let profile = "azan";
@@ -497,8 +505,13 @@ else{
     console.log("etc")
 }
 // you can define conditions without braces
-if(profile ===  "khan") console.log("khan is true")
-if(profile !==  "khan") console.log("khan is not true")
+// if(profile ===  "khan") console.log("khan is true")
+// if(profile !==  "khan") console.log("khan is not true")
+
+
+let portfolio = "khan";
+// if(portfolio === "azan") console.log("azan is ture")
+if(portfolio !== "azan") console.log("khan is ture")
 
 // EXAMPLE
 
@@ -532,37 +545,58 @@ switch ("blue"){
 //Date Object
 //it will get the date from your computer
 
-let dateValue;
-const today = new Date();
+// let dateValue;
+// const today = new Date();
 
-console.log(today,"today");
+// console.log(today,"today");
 
-// let birthday = new Date("1-26-2007"); // month date year
-// let birthday = new Date("january 26 2007");
-let birthday = new Date("01/26/2007");
-console.log(birthday);
+// // let birthday = new Date("1-26-2007"); // month date year
+// // let birthday = new Date("january 26 2007");
+// let birthday = new Date("01/26/2007");
+// console.log(birthday);
 
-dateValue = today.getMonth() +1;
-dateValue = today.getFullYear();
-dateValue = today.getHours();
-dateValue = today.getMinutes();
-dateValue = today.getSeconds();
-dateValue = today.getMilliseconds();
-dateValue = today.getTime();
-console.log(dateValue, "date value");
+// dateValue = today.getMonth() +1;
+// dateValue = today.getFullYear();
+// dateValue = today.getHours();
+// dateValue = today.getMinutes();
+// dateValue = today.getSeconds();
+// dateValue = today.getMilliseconds();
+// dateValue = today.getTime();
+// console.log(dateValue, "date value");
 
-today. setMonth(12);
-today. setDate(26);
-today. setFullYear(2007);
-today. setHours(1);
-today. setMinutes(10);
-today. setSeconds(30);
+// today. setMonth(12);
+// today. setDate(26);
+// today. setFullYear(2007);
+// today. setHours(1);
+// today. setMinutes(10);
+// today. setSeconds(30);
 
-console.log( 
-    `${today.getDate()} - ${today.getMonth()+1} - ${today.getFullYear()} ` 
-);
+// console.log( 
+//     `${today.getDate()} - ${today.getMonth()+1} - ${today.getFullYear()} ` 
+// );
+
+let timeGet;
+const today  = new Date()
+timeGet = today.getTime()
+timeGet = today.getHours()
+timeGet = today.getDate()
+timeGet = today.getDay()
+timeGet = today.getMinutes()
+timeGet = today.getSeconds()
+timeGet = today.getMilliseconds()
+timeGet = today.getFullYear()
+timeGet = today.getMonth() + 1;
+
+
+today.setMonth(0) + 1;
+today.setDate(26);
+today.setFullYear(2007);
+// timeGet = today.setDay();
+document.write(`${today.getMonth(0) + 1}-${today.getDate(26)}-${today.getFullYear(2007)}`)
+
+
+
 let day;
-
 switch(new Date().getDay()){
     case 0:
     day = "sunday";
@@ -611,9 +645,22 @@ printMyFullName("AZAN", "NOMAN");
 
 //we can return things from functions
 
-function checkcondition(){
-    return true;
+function checkcondition(fname){
+    return fname;
 }
 
-const checkconditionVariable = checkcondition();
-console.log(checkconditionVariable,"checkconditionVariable");
+const checkconditionVariable = checkcondition("hafiz");
+console.log(checkconditionVariable,"checkconditionVariable is true");
+
+const fname = "azan";
+const lname = "khan";
+
+let fuName = `${fname} ${lname}`
+console.log(fuName,"fuName")
+
+let vari = fuName.includes(lname);
+console.log(vari,"vari")
+
+let desig = `my name is ${fname}`
+let replaceName = desig.replace(`${fname}`,"hafiz Azan" )
+console.log(replaceName)
