@@ -1,6 +1,34 @@
-import { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import DisplayCount from './component/DisplayCount';
+import ContactUs from './component/ContactUs';
+
+const task = [
+  {
+    name : "task-one",
+  },
+  {
+    name : "task-two",
+  },
+  {
+    name : "task-three",
+  },
+  {
+    name : "task-4",
+  },
+  {
+    name : "task-5",
+  },
+  {
+    name : "task-6",
+  },
+  {
+    name : "task-7",
+  },
+  {
+    name : "task-8",
+  },
+]
 
 function App() {
   // let count = 0  waja plus na hone ki q ke ismai hamai hook use krna hoga jabhi hoga hal esay nhi hota
@@ -31,9 +59,11 @@ function App() {
       setCount(count = 0) 
     }
   }
+
+  console.log("component is refresh")
   return (
     <div className='centerKrna'>
-    <h1 value = "0" onChange={changing}>Count {count}</h1>
+    <DisplayCount count ={count} />
     <button onClick ={increaseMent}>Increase</button>  &nbsp;
     <button onClick={disincreament}>disincrease</button>
     <br/>
@@ -43,9 +73,16 @@ function App() {
     <br/>
     <button onClick={() => setIsShowWirting(!isShowWriting)}>
     show/hide
-    </button>
+      </button>
+      <br />
+    {/* listing or loop  */}
+      {task.map((singleTask,index) => {
+      return <p key={index}>{singleTask.name}</p>
+    })}
+
+    <ContactUs />
     </div>
-  );
+  )
 }
 
 export default App;
