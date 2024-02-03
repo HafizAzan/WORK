@@ -55,7 +55,7 @@ const fname = "hafiz";
 const lname = "Azan";
 console.log(fname,lname)
 
-let fuName = "my name is "+ fname + " " + lname;
+let fuName = "my name is "+ fname + " " + lname+"";
 console.log(fuName,"fuName ye esay hee pass wala hai")
 
 const fullName = `my name is${fname} ${lname}`

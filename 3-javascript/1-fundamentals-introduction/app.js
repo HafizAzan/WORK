@@ -150,7 +150,7 @@ console.log(typeof parseInt(mouseprice, "mouseprice"));
 // const mouseNumebr = (parseInt(mouseprice))
 // console.log(mouseNumebr, "mouseNumber");
 
-// new number: ye convert karta hai number ko string mai
+// new number: ye convert karta hai number mai string ko
 
 // let testing_variable = new Number("2");
 // testing_variable = new Number(true); // 1

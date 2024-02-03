@@ -155,6 +155,9 @@ file name mai hamesha capital name likhengay phelai Display-Count.jsx
 jo cheez ham app.js mai ksi element mai pass kra ray hongay aur wo recive kisi dusray component function hoga tw uske param mai props dedangay
 tw ye hee props hain
 
-useMemo : ismai ham return kara sktay hain & varibale bana sktay hain.
+useMemo :ismai ham return kara sktay hain & varibale bana sktay hain 
+
+jab parent mai hill ra ho child ko change krne pr tw useMemo 
+agar parent ki waja se child hil ra ho tw memo.
 
 
