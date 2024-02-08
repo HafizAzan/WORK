@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import { SaveLocalStorage } from "../../App";
 
 const TaskForm = (props) => {
   const { inputTask, setInputTask, TaskList, setTaskList } = props;
@@ -19,6 +20,7 @@ const TaskForm = (props) => {
     const TaskInputTemp = [...TaskList];
     TaskInputTemp.push(inputTask);
     console.log(TaskInputTemp);
+    SaveLocalStorage(TaskInputTemp);
     setTaskList(TaskInputTemp);
     setInputTask("");
   };
