@@ -3,50 +3,72 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Swal from "sweetalert2";
+import Create_Popup from "./components/Create-Popup";
+import Edit_Post from "./components/Edit-Post";
 
-const apiBaseUrl = "https://jsonplaceholder.typicode.com/posts";
+export const BaseApiUrl = "https://jsonplaceholder.typicode.com/posts";
 
 function App() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPostSave] = useState([]);
+
   useEffect(() => {
-    getPostJson();
+    getPosts();
   }, []);
 
-  const getPostJson = () => {
-    fetch(apiBaseUrl)
-      .then((data) => data.json())
+  const getPosts = () => {
+    fetch(BaseApiUrl)
+      .then((Response) => Response.json())
       .then((data) => {
-        console.log(data, "data ie here");
-        setPosts(data);
+        setPostSave(data);
+        console.log(data, "data is here");
       })
-      .catch((error) => console.error(error));
+      .catch(console.error);
   };
 
-  const DeleteBtnhandile = (postId) => {
-    fetch(`${apiBaseUrl}/${postId}`, {
+  const DeletePostReal = (postId) => {
+    fetch(`${BaseApiUrl}/${postId}`, {
       method: "DELETE",
     })
       .then(() => {
-        getPostJson();
-        Swal.fire("Your Post is Deleted", "", "success");
+        Swal.fire("This Post Is Deleted SuccesFully!", " ", "success");
       })
       .catch(() => {
-        Swal.fire("Your Post is not Deleted", "", "error");
+        Swal.fire("This Post Is Not Deleted SuccesFully!", " ", "error");
       });
   };
 
-  const DeleteBtnHandler = (event, postId) => {
+  const DeleteBtnSingleRow = (event, postId) => {
     event.preventDefault();
-    Swal.fire({
-      title: "Do You Want To Delete This Post?",
-      showDenyButton: true,
-      confirmButtonText: "Yes",
-      denyButtonText: `No`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        DeleteBtnhandile(postId);
-      }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
     });
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          DeletePostReal(postId);
+        } else {
+          Swal.fire("This Post Is Not Deleted SuccesFully!", " ", "error");
+        }
+      });
+    console.log("deleted!");
+  };
+
+  const PopupOpenEdit = (event, PostId) => {
+    event.preventDefault();
+    window.$("#edit-post").modal("show");
   };
 
   return (
@@ -59,66 +81,9 @@ function App() {
         <a className="btn btn-primary" data-toggle="modal" href="#create-post">
           Create Post
         </a>
-        <div className="modal fade" id="create-post">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
-                  &times;
-                </button>
-                <h4 className="modal-title">Create Post</h4>
-              </div>
-              <div className="modal-body">
-                <form action="" method="POST" role="form" id="create-post-form">
-                  <div className="form-group">
-                    <label>Title</label>
-                    <input type="text" className="form-control" id="post_title" placeholder="Title" />
-                  </div>
+        <Create_Popup getPosts={getPosts} />
 
-                  <div className="form-group">
-                    <label>Body</label>
-                    <textarea name="" id="post_body" cols="30" rows="10" placeholder="Body" className="form-control"></textarea>
-                  </div>
-
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="modal fade" id="edit-post">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
-                  &times;
-                </button>
-                <h4 className="modal-title">Edit Post</h4>
-              </div>
-              <div className="modal-body">
-                <form action="" method="POST" role="form" id="edit-post-form">
-                  <input type="hidden" name="post_id" id="edit_post_id" />
-                  <div className="form-group">
-                    <label>Title</label>
-                    <input type="text" className="form-control" id="edit_post_title" placeholder="Title" />
-                  </div>
-
-                  <div className="form-group">
-                    <label>Body</label>
-                    <textarea name="" id="edit_post_body" cols="30" rows="10" placeholder="Body" className="form-control"></textarea>
-                  </div>
-
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Edit_Post />
 
         <table className="table table-hover">
           <thead>
@@ -131,17 +96,19 @@ function App() {
             </tr>
           </thead>
           <tbody id="todos-listing">
-            {posts?.map((singlePost) => {
+            {posts.map((singlePost) => {
               return (
                 <tr key={singlePost.id}>
                   <td>{singlePost.id}</td>
                   <td>{singlePost.userId}</td>
                   <td>{singlePost.title}</td>
                   <td>
-                    <button className="btn btn-primary ">Edit</button>
+                    <button className="btn btn-primary" onClick={(event) => PopupOpenEdit(event, singlePost.id)}>
+                      Edit
+                    </button>
                   </td>
                   <td>
-                    <button className="btn btn-danger" onClick={(event) => DeleteBtnHandler(event, singlePost.id)}>
+                    <button className="btn btn-danger" onClick={(event) => DeleteBtnSingleRow(event, singlePost.id)}>
                       Delete
                     </button>
                   </td>
